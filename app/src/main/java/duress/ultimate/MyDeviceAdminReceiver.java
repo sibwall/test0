@@ -134,6 +134,12 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 			Thread.sleep(150);
 				
 			dpm.lockNow();
+
+			Thread.sleep(150);
+
+			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "wakeUP");
+            wakeLock.acquire(7000);
                 
             }
 
