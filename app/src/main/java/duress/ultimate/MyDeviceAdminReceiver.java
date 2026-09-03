@@ -1,6 +1,9 @@
 package duress.ultimate;
 
 import java.util.Collections;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.content.pm.PackageManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DeviceAdminReceiver;
 import android.content.ComponentName;
@@ -69,6 +72,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
     private void ephemeral_profile_masking(Context context) {
     try {
     DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+	if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          	
     ComponentName adminComponent = getWho(context);
     android.os.UserManager userManager = (android.os.UserManager) context.getSystemService(Context.USER_SERVICE);
 
@@ -98,6 +102,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 	private void silent_swith(Context context) {        
         try {
 		DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+		if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          	
         ComponentName adminComponent = getWho(context);
         
             int flags = DevicePolicyManager.SKIP_SETUP_WIZARD | DevicePolicyManager.MAKE_USER_EPHEMERAL;
