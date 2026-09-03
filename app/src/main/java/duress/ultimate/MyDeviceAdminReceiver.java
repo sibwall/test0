@@ -123,7 +123,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
 		    dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
                 
-            Thread.sleep(150); 
+            Thread.sleep(100); 
 
 			dpm.lockNow();           
 
@@ -131,11 +131,11 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
 			dpm.lockNow();                
 				
-			Thread.sleep(150);
+			Thread.sleep(100);
 				
 			dpm.lockNow();
 
-			Thread.sleep(150);
+			Thread.sleep(100);
 
 			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
             PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "wakeUP");
