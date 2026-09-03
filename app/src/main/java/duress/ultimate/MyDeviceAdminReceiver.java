@@ -70,7 +70,6 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
 		dpm.setApplicationHidden(adminComponent, "com.android.settings", true);				
 				
-        //dpm.setApplicationHidden(adminComponent, context.getPackageName(), true);            
         }
     } 
 
