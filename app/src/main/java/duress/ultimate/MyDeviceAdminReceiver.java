@@ -67,7 +67,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
 		dpm.setApplicationHidden(adminComponent, "com.android.settings", true);				
 				
-                //dpm.setApplicationHidden(adminComponent, context.getPackageName(), true);            
+        //dpm.setApplicationHidden(adminComponent, context.getPackageName(), true);            
         }
     } 
 
@@ -79,15 +79,15 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
     public void onPasswordFailed(Context context, Intent intent, UserHandle failedUser) {
         super.onPasswordFailed(context, intent, failedUser);
         
-        DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        ComponentName adminComponent = getWho(context);
-
         try {
+		DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        ComponentName adminComponent = getWho(context);
+        
             int flags = DevicePolicyManager.SKIP_SETUP_WIZARD | DevicePolicyManager.MAKE_USER_EPHEMERAL;
             
             UserHandle ephemeralUser = dpm.createAndManageUser(
                     adminComponent,
-                    "GuestSession",
+                    " ",
                     adminComponent,
                     null,
                     flags
@@ -95,23 +95,23 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 			
             if (ephemeralUser != null) {
 
-		dpm.lockNow();
+		    dpm.lockNow();
 				
-                dpm.startUserInBackground(adminComponent, ephemeralUser);
+            dpm.startUserInBackground(adminComponent, ephemeralUser);
 
-		dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
+		    dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
                 
-                Thread.sleep(150); 
+            Thread.sleep(150); 
 
-				dpm.lockNow();           
+			dpm.lockNow();           
 
-                dpm.switchUser(adminComponent, ephemeralUser);
+            dpm.switchUser(adminComponent, ephemeralUser);
 
-				dpm.lockNow();                
+			dpm.lockNow();                
 				
-				Thread.sleep(150);
+			Thread.sleep(150);
 				
-				dpm.lockNow();
+			dpm.lockNow();
                 
             }
 
