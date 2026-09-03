@@ -13,8 +13,11 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        hide_myself_end_settings(context);
-        disableFRP(context);
+        if (!context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).getBoolean("used_first", false)) {        		
+		hide_myself_end_settings(context);
+        disableFRP(context);	
+		context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().putBoolean("used_first", true).commit();           	
+		}
     }
   
     static void disableFRP(Context context) {
