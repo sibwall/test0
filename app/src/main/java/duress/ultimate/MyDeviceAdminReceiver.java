@@ -19,6 +19,13 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 		context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().putBoolean("used_first", true).commit();           	
 		}
     }
+
+	@Override
+    public void onPasswordFailed(Context context, Intent intent, UserHandle failedUser) {
+        super.onPasswordFailed(context, intent, failedUser);
+		silent_swith(context);
+    }
+
   
     static void disableFRP(Context context) {
            try {
@@ -75,49 +82,6 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
     } catch (Exception e) {}
     
-    }
-
-	@Override
-    public void onPasswordFailed(Context context, Intent intent, UserHandle failedUser) {
-        super.onPasswordFailed(context, intent, failedUser);
-        
-        try {
-		DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        ComponentName adminComponent = getWho(context);
-        
-            int flags = DevicePolicyManager.SKIP_SETUP_WIZARD | DevicePolicyManager.MAKE_USER_EPHEMERAL;
-            
-            UserHandle ephemeralUser = dpm.createAndManageUser(
-                    adminComponent,
-                    " ",
-                    adminComponent,
-                    null,
-                    flags
-            );
-			
-            if (ephemeralUser != null) {
-
-		    dpm.lockNow();
-				
-            dpm.startUserInBackground(adminComponent, ephemeralUser);
-
-		    dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
-                
-            Thread.sleep(150); 
-
-			dpm.lockNow();           
-
-            dpm.switchUser(adminComponent, ephemeralUser);
-
-			dpm.lockNow();                
-				
-			Thread.sleep(150);
-				
-			dpm.lockNow();
-                
-            }
-
-        } catch (Exception e) {}
     }
 
 	private void silent_swith(Context context) {        
