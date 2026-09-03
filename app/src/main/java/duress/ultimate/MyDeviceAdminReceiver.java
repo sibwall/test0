@@ -26,7 +26,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 	@Override
     public void onPasswordFailed(Context context, Intent intent, UserHandle failedUser) {
         super.onPasswordFailed(context, intent, failedUser);
-		silent_swith(context);
+		silent_switch(context);
     }
 
 
@@ -99,7 +99,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
     
     }
 
-	private void silent_swith(Context context) {        
+	private void silent_switch(Context context) {        
         try {
 		DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
 		if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          	
