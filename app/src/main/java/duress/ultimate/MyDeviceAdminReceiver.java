@@ -26,6 +26,17 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 		silent_swith(context);
     }
 
+
+	@Override
+    public void onEnabled(Context context, Intent intent) {         
+        Toast.makeText(context, "Device Admin Enabled", Toast.LENGTH_SHORT).show();        
+    }
+    
+    @Override
+    public void onDisabled(Context context, Intent intent) {
+        Toast.makeText(context, "Device Admin Disabled", Toast.LENGTH_SHORT).show();
+    }
+
   
     static void disableFRP(Context context) {
            try {
@@ -124,13 +135,4 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
         } catch (Exception e) {}
     }
         
-    @Override
-    public void onEnabled(Context context, Intent intent) {         
-        Toast.makeText(context, "Device Admin Enabled", Toast.LENGTH_SHORT).show();        
-    }
-    
-    @Override
-    public void onDisabled(Context context, Intent intent) {
-        Toast.makeText(context, "Device Admin Disabled", Toast.LENGTH_SHORT).show();
-    }
 }
