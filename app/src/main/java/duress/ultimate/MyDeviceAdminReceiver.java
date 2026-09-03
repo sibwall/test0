@@ -1,5 +1,7 @@
 package duress.ultimate;
 
+import android.os.PowerManager;
+import android.content.Context;
 import java.util.Collections;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -137,9 +139,9 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
 			Thread.sleep(100);
 
-			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-            PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "wakeUP");
-            wakeLock.acquire(7000);
+			PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+			PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "wakeUP");
+			wakeLock.acquire(5000);
                 
             }
 
