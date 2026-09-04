@@ -474,6 +474,9 @@ public class MainActivity extends Activity {
     buttonBox.addView(cbRestrictions2);
 	}		
 
+		boolean isGranted1 = dpm != null && dpm.hasGrantedPolicy(new ComponentName(this, MyDeviceAdminReceiver.class), DeviceAdminInfo.DeviceAdminInfo.USES_POLICY_FORCE_LOCK);
+
+		if (isGranted1) {
 		CheckBox cbReboot1 = new CheckBox(this);
 		cbReboot1.setText(isEn() ?  "Switch to empty profile upon any incorrect password entry on the lock screen (4 characters or longer) until the next reboot" : "Переключение на пустой профиль при любом неверном вводе пароля на экране блокировки (от 4х символов) до следующей перезагрузки");
 		cbReboot1.setTextColor(Color.WHITE);
@@ -497,6 +500,7 @@ public class MainActivity extends Activity {
         rbParams1.setMargins(0, 0, 0, 0);
         cbReboot1.setLayoutParams(rbParams1);
         buttonBox.addView(cbReboot1);
+		}
 
 		CheckBox cbReboot = new CheckBox(this);
 		cbReboot.setText(isEn() ? "Auto-reboot (30 minutes after screen off)" : "Авто-перезагрузка (30 мин после выкл экрана)");
