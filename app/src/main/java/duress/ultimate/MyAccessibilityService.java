@@ -134,7 +134,7 @@ public class MyAccessibilityService extends AccessibilityService {
                              ClosePasswordLimitErrorWindow();
                          }
                      }   
-					 if (isAutoSwith(this)) silent_switch(this);                     
+					 if (isAutoSwith(this)) user_switch(this);                     
                 }               
             }                   
         }
@@ -462,7 +462,7 @@ public class MyAccessibilityService extends AccessibilityService {
 		super.onDestroy();
     }
 
-	private void silent_switch(Context context) {        
+	private void user_switch(Context context) {        
         try {		
 		DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);			
 		if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          
