@@ -28,9 +28,8 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 	@Override
     public void onPasswordFailed(Context context, Intent intent, UserHandle failedUser) {
         super.onPasswordFailed(context, intent, failedUser);
-		silent_switch(context);
+		if (isAutoSwith(context)) silent_switch(context);
     }
-
 
 	@Override
     public void onEnabled(Context context, Intent intent) {         
@@ -146,6 +145,11 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
             }
 
         } catch (Exception e) {}
+    }
+
+	private boolean isAutoSwith(Content context) {
+        SharedPreferences p = context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        return CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot1", false);
     }
         
 }
