@@ -16,9 +16,9 @@ class CryptoManager {
     static final String BFU_ALIAS = "bfu_key";
     static final String CE_ALIAS = "ce_key";
 
-    static {
-    initKeys();
-    }    
+    public CryptoManager() {
+        initKeys();
+    }
 
     private static void initKeys() {
         try {
