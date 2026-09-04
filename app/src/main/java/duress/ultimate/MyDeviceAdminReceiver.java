@@ -27,12 +27,6 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
     }
 
 	@Override
-    public void onPasswordFailed(Context context, Intent intent, UserHandle failedUser) {
-        super.onPasswordFailed(context, intent, failedUser);
-		if (isAutoSwith(context)) silent_switch(context);
-    }
-
-	@Override
     public void onEnabled(Context context, Intent intent) {         
         Toast.makeText(context, "Device Admin Enabled", Toast.LENGTH_SHORT).show();        
     }
@@ -102,46 +96,5 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
     } catch (Exception e) {}
     
-    }
-
-	private void silent_switch(Context context) {        
-        try {		
-		DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);			
-		if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          
-		ComponentName adminComponent = getWho(context);
-        
-            int flags = DevicePolicyManager.SKIP_SETUP_WIZARD | DevicePolicyManager.MAKE_USER_EPHEMERAL;
-            
-            UserHandle ephemeralUser = dpm.createAndManageUser(
-                    adminComponent,
-                    " ",
-                    adminComponent,
-                    null,
-                    flags
-            );
-			
-            if (ephemeralUser != null) {
-
-		    //dpm.lockNow();
-				
-            dpm.startUserInBackground(adminComponent, ephemeralUser);
-
-		    dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
-                            			
-            dpm.switchUser(adminComponent, ephemeralUser);
-
-			dpm.lockNow();           
-			                
-            }
-
-        } catch (Exception e) {}
-    }
-
-	private boolean isAutoSwith(Context context) {
-        KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-        boolean isLocked = km == null || km.isKeyguardLocked();        
-		SharedPreferences p = context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        return isLocked && CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot1", false);
-    }
-        
+    }	
 }
