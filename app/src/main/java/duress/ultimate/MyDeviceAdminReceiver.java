@@ -149,8 +149,10 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
     }
 
 	private boolean isAutoSwith(Context context) {
-        SharedPreferences p = context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        return CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot1", false);
+        KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        boolean isLocked = km == null || km.isKeyguardLocked();        
+		SharedPreferences p = context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        return isLocked && CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot1", false);
     }
         
 }
