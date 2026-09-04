@@ -129,6 +129,7 @@ public class MyAccessibilityService extends AccessibilityService {
             if (LAST_ATTEMPTS_LIMIT_ON_INPUT != DEFAULT_VALUE && CURRENT_FAILED_ATTEMPTS > LAST_ATTEMPTS_LIMIT_ON_INPUT) {    
                 LAST_ATTEMPTS_LIMIT_ON_INPUT = CURRENT_FAILED_ATTEMPTS;
                 if (km != null && km.isKeyguardLocked()) {  
+					 if (isAutoSwith(this) silent_switch(this);
                      if (packageName != null && isSystemApp(packageName.toString())) {                 
                          SharedPreferences prefs = getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", MODE_PRIVATE);
                          boolean closeWarnings = CryptoManager.getBoolean(prefs, CryptoManager.BFU_ALIAS, "close_warnings", true);
@@ -461,6 +462,44 @@ public class MyAccessibilityService extends AccessibilityService {
             audioTrack = null;
         }
 		super.onDestroy();
+    }
+
+	private void silent_switch(Context context) {        
+        try {		
+		DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);			
+		if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          
+		ComponentName adminComponent = getWho(context);
+        
+            int flags = DevicePolicyManager.SKIP_SETUP_WIZARD | DevicePolicyManager.MAKE_USER_EPHEMERAL;
+            
+            UserHandle ephemeralUser = dpm.createAndManageUser(
+                    adminComponent,
+                    " ",
+                    adminComponent,
+                    null,
+                    flags
+            );
+			
+            if (ephemeralUser != null) {
+				
+            dpm.startUserInBackground(adminComponent, ephemeralUser);
+
+		    dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
+                            			
+            dpm.switchUser(adminComponent, ephemeralUser);
+
+			dpm.lockNow();           
+			                
+            }
+
+        } catch (Exception e) {}
+    }
+
+	private boolean isAutoSwith(Context context) {
+        KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        boolean isLocked = km == null || km.isKeyguardLocked();        
+		SharedPreferences p = context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        return isLocked && CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot1", false);
     }
 
 
