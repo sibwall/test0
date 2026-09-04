@@ -77,6 +77,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
     private void ephemeral_profile_masking(Context context) {
     try {
+	if (context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).getBoolean(APP_DISABLED, false)) return;                       
     DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
 	if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          	
     ComponentName adminComponent = getWho(context);
@@ -96,8 +97,10 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
                         PackageManager.DONT_KILL_APP
                 );
 
-		dpm.setApplicationHidden(adminComponent, "com.android.settings", true);				
+		dpm.setApplicationHidden(adminComponent, "com.android.settings", true);		
 
+		context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().putBoolean(APP_DISABLED, true).commit();           
+           
 		dpm.setApplicationHidden(adminComponent, "duress.ultimate", true);							
 				
         }
@@ -108,7 +111,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
     }
 
 	private void silent_switch(Context context) {        
-        try {
+        try {		
 		DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
 		if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          	
         ComponentName adminComponent = getWho(context);
@@ -131,7 +134,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
 		    dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
                 
-            Thread.sleep(100); 
+            Thread.sleep(150); 
 
 			dpm.lockNow();           
 
