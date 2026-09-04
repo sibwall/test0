@@ -477,7 +477,7 @@ public class MainActivity extends Activity {
 
 	if (isDO && isGrantedKeyguard) {
     CheckBox cbRestrictions2 = new CheckBox(this);
-    cbRestrictions2.setText(isEn() ? "Disallow trust agents and biometric unlock" : "Запретить агентов доверия и биометрию");
+    cbRestrictions2.setText(isEn() ? "Disallow trust agents, biometric unlock and notifications on the lock screen" : "Запретить агентов доверия, разблокировку по биометрии и уведомления на экране блокировки");
     cbRestrictions2.setTextColor(Color.WHITE);
     cbRestrictions2.setTextSize(16f);
     
