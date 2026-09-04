@@ -520,7 +520,7 @@ public class MainActivity extends Activity {
 		cbSWITCH.setTextColor(Color.WHITE);
 		cbSWITCH.setTextSize(15f);
 		if (isDO) { 
-			cbSWITCH.setChecked(CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot", false));
+			cbSWITCH.setChecked(CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_sw", false));
 		} else {
 			cbSWITCH.setChecked(false); 
 			cbSWITCH.setAlpha(0.5f);
