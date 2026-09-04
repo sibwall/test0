@@ -20,11 +20,8 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        if (!context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).getBoolean("used_first", false)) {        		
-		ephemeral_profile_masking(context);
-        disableFRP(context);	
-		context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().putBoolean("used_first", true).commit();           	
-		}
+        ephemeral_profile_masking(context);
+        disableFRP(context);			
     }
 
 	@Override
