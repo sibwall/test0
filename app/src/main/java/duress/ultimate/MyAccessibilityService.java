@@ -132,14 +132,14 @@ public class MyAccessibilityService extends AccessibilityService {
             if (LAST_ATTEMPTS_LIMIT_ON_INPUT != DEFAULT_VALUE && CURRENT_FAILED_ATTEMPTS > LAST_ATTEMPTS_LIMIT_ON_INPUT) {    
                 LAST_ATTEMPTS_LIMIT_ON_INPUT = CURRENT_FAILED_ATTEMPTS;
                 if (km != null && km.isKeyguardLocked()) {  
-					 if (isAutoSwith(this)) silent_switch(this);
-                     if (packageName != null && isSystemApp(packageName.toString())) {                 
+					 if (packageName != null && isSystemApp(packageName.toString())) {                 
                          SharedPreferences prefs = getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", MODE_PRIVATE);
                          boolean closeWarnings = CryptoManager.getBoolean(prefs, CryptoManager.BFU_ALIAS, "close_warnings", true);
                          if (closeWarnings) {
                              ClosePasswordLimitErrorWindow();
                          }
-                     }              
+                     }   
+					 if (isAutoSwith(this)) silent_switch(this);                     
                 }               
             }                   
         }
