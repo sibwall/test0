@@ -16,11 +16,7 @@ class CryptoManager {
     static final String BFU_ALIAS = "bfu_key";
     static final String CE_ALIAS = "ce_key";
 
-    public CryptoManager() {
-        initKeys();
-    }
-
-    private static void initKeys() {
+    static void initKeys() {
         try {
             KeyStore keyStore = KeyStore.getInstance(ANDROID_KEYSTORE);
             keyStore.load(null);
