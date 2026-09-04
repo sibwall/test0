@@ -1,5 +1,6 @@
 package duress.ultimate;
 
+import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.content.Context;
 import java.util.Collections;
@@ -147,7 +148,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
         } catch (Exception e) {}
     }
 
-	private boolean isAutoSwith(Content context) {
+	private boolean isAutoSwith(Context context) {
         SharedPreferences p = context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         return CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot1", false);
     }
