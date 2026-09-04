@@ -485,8 +485,9 @@ public class MainActivity extends Activity {
         int disabledFeatures = dpm.getKeyguardDisabledFeatures(adminName);
         boolean trustAgentsDisabled = (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS) != 0;
         boolean biometricsDisabled = (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_BIOMETRICS) != 0;
+		boolean secureNotificationsDisabled = (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS) != 0;
 
-        cbRestrictions2.setChecked(trustAgentsDisabled && biometricsDisabled);
+        cbRestrictions2.setChecked(trustAgentsDisabled && biometricsDisabled && secureNotificationsDisabled);
     } else {
         cbRestrictions2.setChecked(false);
         cbRestrictions2.setAlpha(0.5f);
@@ -501,11 +502,13 @@ public class MainActivity extends Activity {
         int currentFeatures = dpm.getKeyguardDisabledFeatures(adminName);
         if (cbRestrictions2.isChecked()) {
             int newFeatures = currentFeatures | DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS 
-                                            | DevicePolicyManager.KEYGUARD_DISABLE_BIOMETRICS;
+            | DevicePolicyManager.KEYGUARD_DISABLE_BIOMETRICS;			        
+			| DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
             dpm.setKeyguardDisabledFeatures(adminName, newFeatures);
         } else {
             int newFeatures = currentFeatures & ~DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS 
-                                             & ~DevicePolicyManager.KEYGUARD_DISABLE_BIOMETRICS;
+            & ~DevicePolicyManager.KEYGUARD_DISABLE_BIOMETRICS;
+			& ~DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
             dpm.setKeyguardDisabledFeatures(adminName, newFeatures);
         }
     });
