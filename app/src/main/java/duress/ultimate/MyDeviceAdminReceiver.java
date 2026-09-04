@@ -1,12 +1,6 @@
 package duress.ultimate;
 
-import android.app.KeyguardManager;
-import android.content.SharedPreferences;
-import android.os.PowerManager;
-import android.content.Context;
 import java.util.Collections;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.content.pm.PackageManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DeviceAdminReceiver;
