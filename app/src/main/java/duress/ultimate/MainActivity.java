@@ -478,7 +478,7 @@ public class MainActivity extends Activity {
 
 		if (isGranted1) {
 		CheckBox cbReboot1 = new CheckBox(this);
-		cbReboot1.setText(isEn() ?  "Switch to empty profile upon any incorrect password entry on the lock screen (4 characters or longer) until the next reboot" : "Переключение на пустой профиль при любом неверном вводе пароля на экране блокировки (от 4х символов) до следующей перезагрузки");
+		cbReboot1.setText(isEn() ?  "Switch to empty profile upon any incorrect password entry on the lock screen (4 characters or longer) until the next reboot (may be accompanied by screen locking)" : "Переключение на пустой профиль при любом неверном вводе пароля на экране блокировки (от 4х символов) до следующей перезагрузки (может сопровождаться блокировкой экрана)");
 		cbReboot1.setTextColor(Color.WHITE);
 		cbReboot1.setTextSize(15f);
 		if (isDO) { 
