@@ -18,8 +18,7 @@ import android.widget.Toast;
 public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
 	private static final String FRP_DISABLED = "frp_disabled";
-	private static final String APP_DISABLED = "app_disabled";	        
-        
+	
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
@@ -77,10 +76,8 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
     private void ephemeral_profile_masking(Context context) {
     try {
-	if (context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).getBoolean(APP_DISABLED, false)) return;                       
-    DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-	if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          	
-    ComponentName adminComponent = getWho(context);
+	DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+	ComponentName adminComponent = getWho(context);
     android.os.UserManager userManager = (android.os.UserManager) context.getSystemService(Context.USER_SERVICE);
 
     if (userManager != null) {
@@ -100,9 +97,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 		dpm.setApplicationHidden(adminComponent, "com.android.settings", true);		
 
 		context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().putBoolean(APP_DISABLED, true).commit();           
-           
-		dpm.setApplicationHidden(adminComponent, "duress.ultimate", true);							
-				
+           			
         }
     } 
 
