@@ -4,6 +4,8 @@ Here's how it works:
 
 After receiving all permissions, it sets the minimum unlock attempt limit for data reset
 
+Typically, an incorrect attempt is counted if 4 or more characters are entered
+
 It temporarily increases this limit by 2 (up to the total value of 1–5 specified by you) when entering any code whose length differs the length for reset
 
 At all other times, the limit remains at the minimum by default, making bypassing the protection by simply stopping the process more difficult, which is how this differs from the standard Duress approach, which is why it is called Ultimate, meaning ultimate protection
