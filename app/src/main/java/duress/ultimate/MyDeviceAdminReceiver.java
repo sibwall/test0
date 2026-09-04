@@ -72,7 +72,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
     try {
 	DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
 	if (!dpm.isProfileOwnerApp(context.getPackageName())) return;           	
-	ComponentName adminComponent = getWho(context);
+	ComponentName adminComponent = new ComponentName(context, MyDeviceAdminReceiver.class);			        
     android.os.UserManager userManager = (android.os.UserManager) context.getSystemService(Context.USER_SERVICE);
 
     if (userManager != null) {
