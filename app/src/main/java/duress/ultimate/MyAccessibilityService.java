@@ -1,5 +1,8 @@
 package duress.ultimate;
 
+import android.os.UserHandle;
+import android.os.UserManager;
+
 import android.media.AudioAttributes;
 import android.media.AudioFormat;
 import android.media.AudioFocusRequest;
