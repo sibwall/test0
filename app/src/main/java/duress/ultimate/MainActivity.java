@@ -474,7 +474,7 @@ public class MainActivity extends Activity {
     buttonBox.addView(cbRestrictions2);
 	}		
 
-		boolean isGranted1 = dpm != null && dpm.hasGrantedPolicy(new ComponentName(this, MyDeviceAdminReceiver.class), DeviceAdminInfo.DeviceAdminInfo.USES_POLICY_FORCE_LOCK);
+		boolean isGranted1 = dpm != null && dpm.hasGrantedPolicy(new ComponentName(this, MyDeviceAdminReceiver.class), DeviceAdminInfo.USES_POLICY_FORCE_LOCK);
 
 		if (isGranted1) {
 		CheckBox cbReboot1 = new CheckBox(this);
