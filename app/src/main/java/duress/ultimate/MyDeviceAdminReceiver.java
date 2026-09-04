@@ -43,6 +43,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
   
     static void disableFRP(Context context) {
            try {
+		   if (context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).getBoolean(FRP_DISABLED, false)) return;             
            DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
            if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;
            ComponentName admin = new ComponentName(context, MyDeviceAdminReceiver.class);
