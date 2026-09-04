@@ -65,6 +65,8 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
            Intent intent = new Intent("com.google.android.gms.auth.FRP_CONFIG_CHANGED");
            intent.setPackage("com.google.android.gms");
            context.sendBroadcast(intent);
+
+		   context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().putBoolean(FRP_DISABLED, true).commit();           
            
            } catch (Throwable t) {}
    }
