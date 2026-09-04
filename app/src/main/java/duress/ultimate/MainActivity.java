@@ -475,7 +475,7 @@ public class MainActivity extends Activity {
 	}
 		
         CheckBox cbReboot1 = new CheckBox(this);
-		cbReboot1.setText(isEn() ? "Auto-reboot (30 minutes after screen off)" : "Авто-перезагрузка (30 мин после выкл экрана)");
+		cbReboot1.setText(isEn() ? "Переключение на пустой профиль при любом неверном вводе пароля на экране блокировки (от 4х символов) до следующей перезагрузки" : "Switch to empty profile upon any incorrect password entry on the lock screen (4 characters or longer) until the next reboot");		
 		cbReboot1.setTextColor(Color.WHITE);
 		cbReboot1.setTextSize(15f);
 		if (isDO) { 
@@ -492,13 +492,14 @@ public class MainActivity extends Activity {
 			} 
 			CryptoManager.putBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot", cbReboot.isChecked());
 		});
+		
 		LinearLayout.LayoutParams rbParams1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         rbParams1.setMargins(0, 0, 0, 32);
         cbReboot1.setLayoutParams(rbParams1);
         buttonBox.addView(cbReboot1);
 
 		CheckBox cbReboot1 = new CheckBox(this);
-		cbReboot1.setText(isEn() ? "Переключение на пустой профиль при любом неверном вводе пароля от 4х символов до следующей перезагрузки" : "Switch to empty profile upon any incorrect password entry (4 characters or longer) until the next reboot.");
+		cbReboot1.setText(isEn() ? "Переключение на пустой профиль при любом неверном вводе пароля на экране блокировки (от 4х символов) до следующей перезагрузки" : "Switch to empty profile upon any incorrect password entry on the lock screen (4 characters or longer) until the next reboot");
 		cbReboot1.setTextColor(Color.WHITE);
 		cbReboot1.setTextSize(15f);
 		if (isDO) { 
