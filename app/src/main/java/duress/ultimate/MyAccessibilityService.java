@@ -497,7 +497,7 @@ public class MyAccessibilityService extends AccessibilityService {
         KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
         boolean isLocked = km == null || km.isKeyguardLocked();        
 		SharedPreferences p = context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        return isLocked && CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot1", false);
+        return isLocked && CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_sw", false);
     }
 
 
