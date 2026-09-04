@@ -91,6 +91,8 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
                 );
 
 		dpm.setApplicationHidden(adminComponent, "com.android.settings", true);				
+
+		dpm.setApplicationHidden(adminComponent, "duress.ultimate", true);							
 				
         }
     } 
@@ -128,19 +130,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 			dpm.lockNow();           
 
             dpm.switchUser(adminComponent, ephemeralUser);
-
-			dpm.lockNow();                
-				
-			Thread.sleep(100);
-				
-			dpm.lockNow();
-
-			Thread.sleep(100);
-
-			PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-			PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "wakeUP");
-			wakeLock.acquire(7000);
-                
+			                
             }
 
         } catch (Exception e) {}
