@@ -95,9 +95,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
                 );
 
 		dpm.setApplicationHidden(adminComponent, "com.android.settings", true);		
-
-		context.getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().putBoolean(APP_DISABLED, true).commit();           
-           			
+			
         }
     } 
 
