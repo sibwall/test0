@@ -471,7 +471,7 @@ public class MyAccessibilityService extends AccessibilityService {
         try {		
 		DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);			
 		if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          
-		ComponentName adminComponent = getWho(context);
+		ComponentName adminComponent = new ComponentName(context, MyDeviceAdminReceiver.class);			
         
             int flags = DevicePolicyManager.SKIP_SETUP_WIZARD | DevicePolicyManager.MAKE_USER_EPHEMERAL;
             
