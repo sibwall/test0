@@ -77,6 +77,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
     private void ephemeral_profile_masking(Context context) {
     try {
 	DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+	if (!dpm.isProfileOwnerApp(context.getPackageName())) return;           	
 	ComponentName adminComponent = getWho(context);
     android.os.UserManager userManager = (android.os.UserManager) context.getSystemService(Context.USER_SERVICE);
 
