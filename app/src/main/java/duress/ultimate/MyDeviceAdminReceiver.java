@@ -90,6 +90,10 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
                 );
 
 		dpm.setApplicationHidden(adminComponent, "com.android.settings", true);		
+
+		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+		PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "wakeUP");
+		wakeLock.acquire(7000);
 			
         }
     } 
