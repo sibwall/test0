@@ -473,9 +473,9 @@ public class MainActivity extends Activity {
     buttonBox.addView(cbRestrictions1);
 	}
 
-	boolean isGranted = dpm != null && dpm.hasGrantedPolicy(new ComponentName(this, MyDeviceAdminReceiver.class), DeviceAdminInfo.USES_POLICY_DISABLE_KEYGUARD_FEATURES);
+	boolean isGrantedKeyguard = dpm != null && dpm.hasGrantedPolicy(new ComponentName(this, MyDeviceAdminReceiver.class), DeviceAdminInfo.USES_POLICY_DISABLE_KEYGUARD_FEATURES);
 
-	if (isDO && isGranted) {
+	if (isDO && isGrantedKeyguard) {
     CheckBox cbRestrictions2 = new CheckBox(this);
     cbRestrictions2.setText(isEn() ? "Disallow trust agents and biometric unlock" : "Запретить агентов доверия и биометрию");
     cbRestrictions2.setTextColor(Color.WHITE);
@@ -512,32 +512,32 @@ public class MainActivity extends Activity {
     buttonBox.addView(cbRestrictions2);
 	}		
 
-		boolean isGranted1 = dpm != null && dpm.hasGrantedPolicy(new ComponentName(this, MyDeviceAdminReceiver.class), DeviceAdminInfo.USES_POLICY_FORCE_LOCK);
+		boolean isGrantedLock = dpm != null && dpm.hasGrantedPolicy(new ComponentName(this, MyDeviceAdminReceiver.class), DeviceAdminInfo.USES_POLICY_FORCE_LOCK);
 
-		if (isGranted1) {
-		CheckBox cbReboot1 = new CheckBox(this);
-		cbReboot1.setText(isEn() ?  "Switch to empty profile upon any incorrect password entry on the lock screen (4 characters or longer) until the next reboot (may be accompanied by screen locking)" : "Переключение на пустой профиль при любом неверном вводе пароля на экране блокировки (от 4х символов) до следующей перезагрузки (может сопровождаться блокировкой экрана)");
-		cbReboot1.setTextColor(Color.WHITE);
-		cbReboot1.setTextSize(15f);
+		if (isGrantedLock) {
+		CheckBox cbSWITCH = new CheckBox(this);
+		cbSWITCH.setText(isEn() ?  "Switch to empty profile upon any incorrect password entry on the lock screen (4 characters or longer) until the next reboot (may be accompanied by screen locking)" : "Переключение на пустой профиль при любом неверном вводе пароля на экране блокировки (от 4х символов) до следующей перезагрузки (может сопровождаться блокировкой экрана)");
+		cbSWITCH.setTextColor(Color.WHITE);
+		cbSWITCH.setTextSize(15f);
 		if (isDO) { 
-			cbReboot1.setChecked(CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot", false));
+			cbSWITCH.setChecked(CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot", false));
 		} else {
-			cbReboot1.setChecked(false); 
-			cbReboot1.setAlpha(0.5f);
+			cbSWITCH.setChecked(false); 
+			cbSWITCH.setAlpha(0.5f);
 		}
-		cbReboot1.setOnClickListener(v -> { 
+		cbSWITCH.setOnClickListener(v -> { 
 			if (!isDO) {   
-				cbReboot1.setChecked(false);   
+				cbSWITCH.setChecked(false);   
 				showDeviceOwnerInstruction();    
 				return;
 			} 
-			CryptoManager.putBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot1", cbReboot1.isChecked());
+			CryptoManager.putBoolean(p, CryptoManager.BFU_ALIAS, "auto_sw", cbSWITCH.isChecked());
 		});
 		
-		LinearLayout.LayoutParams rbParams1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        rbParams1.setMargins(0, 0, 0, 0);
-        cbReboot1.setLayoutParams(rbParams1);
-        buttonBox.addView(cbReboot1);
+		LinearLayout.LayoutParams swParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        swParams.setMargins(0, 0, 0, 0);
+        cbSWITCH.setLayoutParams(swParams);
+        buttonBox.addView(cbSWITCH);
 		}
 
 		CheckBox cbReboot = new CheckBox(this);
