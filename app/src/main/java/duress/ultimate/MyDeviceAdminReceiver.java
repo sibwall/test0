@@ -16,6 +16,9 @@ import android.content.Intent;
 import android.widget.Toast;
 
 public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
+
+	private static final String FRP_DISABLED = "frp_disabled";
+	private static final String APP_DISABLED = "app_disabled";	        
         
     @Override
     public void onReceive(Context context, Intent intent) {
