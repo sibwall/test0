@@ -399,6 +399,44 @@ public class MainActivity extends Activity {
 		}
 
 	if (isDO) {
+	CheckBox cbCameraAndCapture = new CheckBox(this);
+        cbCameraAndCapture.setText(isEn()
+        ? "Disallow camera and screenshots"
+        : "Запретить камеру и скриншоты");
+        cbCameraAndCapture.setTextColor(Color.WHITE);
+        cbCameraAndCapture.setTextSize(15f);
+
+        boolean isCamDisabled = false;
+        boolean isScrDisabled = false;
+
+        if (isDO) {    
+            
+            isCamDisabled = dpm.getCameraDisabled(adminName);        
+            isScrDisabled = dpm.getScreenCaptureDisabled(adminName);                    
+            cbCameraAndCapture.setChecked(isCamDisabled && isScrDisabled);
+
+        } else {   
+            cbCameraAndCapture.setChecked(false);   
+            cbCameraAndCapture.setAlpha(0.5f);
+        }
+
+    cbCameraAndCapture.setOnClickListener(v -> {
+    
+            if (!isDO) {     
+                cbCameraAndCapture.setChecked(false);      
+                showDeviceOwnerInstruction();       
+                return;   
+            }
+
+    boolean shouldDisable = cbCameraAndCapture.isChecked();
+
+    dpm.setCameraDisabled(adminName, shouldDisable);
+    dpm.setScreenCaptureDisabled(adminName, shouldDisable);    
+        
+    });
+
+    buttonBox.addView(cbCameraAndCapture);
+
     CheckBox cbRestrictions1 = new CheckBox(this);
     cbRestrictions1.setText(isEn() ? "Disallow autofill, backup, and mount physical media" : "Запретить автозаполнение, бэкап и монтирование физических носителей");
     cbRestrictions1.setTextColor(Color.WHITE);
