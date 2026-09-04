@@ -107,9 +107,9 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
 
 	private void silent_switch(Context context) {        
         try {		
-		DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-		if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          	
-        ComponentName adminComponent = getWho(context);
+		DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);			
+		if (!dpm.isProfileOwnerApp(context.getPackageName())) return;          	
+		ComponentName adminComponent = getWho(context);
         
             int flags = DevicePolicyManager.SKIP_SETUP_WIZARD | DevicePolicyManager.MAKE_USER_EPHEMERAL;
             
