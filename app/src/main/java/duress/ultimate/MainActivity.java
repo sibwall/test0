@@ -474,6 +474,30 @@ public class MainActivity extends Activity {
     buttonBox.addView(cbRestrictions2);
 	}		
 
+		CheckBox cbReboot1 = new CheckBox(this);
+		cbReboot1.setText(isEn() ?  "Switch to empty profile upon any incorrect password entry on the lock screen (4 characters or longer) until the next reboot" : "Переключение на пустой профиль при любом неверном вводе пароля на экране блокировки (от 4х символов) до следующей перезагрузки");
+		cbReboot1.setTextColor(Color.WHITE);
+		cbReboot1.setTextSize(15f);
+		if (isDO) { 
+			cbReboot1.setChecked(CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot", false));
+		} else {
+			cbReboot1.setChecked(false); 
+			cbReboot1.setAlpha(0.5f);
+		}
+		cbReboot1.setOnClickListener(v -> { 
+			if (!isDO) {   
+				cbReboot1.setChecked(false);   
+				showDeviceOwnerInstruction();    
+				return;
+			} 
+			CryptoManager.putBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot1", cbReboot1.isChecked());
+		});
+		
+		LinearLayout.LayoutParams rbParams1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        rbParams1.setMargins(0, 0, 0, 0);
+        cbReboot1.setLayoutParams(rbParams1);
+        buttonBox.addView(cbReboot1);
+
 		CheckBox cbReboot = new CheckBox(this);
 		cbReboot.setText(isEn() ? "Auto-reboot (30 minutes after screen off)" : "Авто-перезагрузка (30 мин после выкл экрана)");
 		cbReboot.setTextColor(Color.WHITE);
@@ -496,31 +520,7 @@ public class MainActivity extends Activity {
         rbParams.setMargins(0, 0, 0, 32);
         cbReboot.setLayoutParams(rbParams);
         buttonBox.addView(cbReboot);
-
-		CheckBox cbReboot1 = new CheckBox(this);
-		cbReboot1.setText(isEn() ? "Переключение на пустой профиль при любом неверном вводе пароля на экране блокировки (от 4х символов) до следующей перезагрузки" : "Switch to empty profile upon any incorrect password entry on the lock screen (4 characters or longer) until the next reboot");
-		cbReboot1.setTextColor(Color.WHITE);
-		cbReboot1.setTextSize(15f);
-		if (isDO) { 
-			cbReboot1.setChecked(CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot", false));
-		} else {
-			cbReboot1.setChecked(false); 
-			cbReboot1.setAlpha(0.5f);
-		}
-		cbReboot1.setOnClickListener(v -> { 
-			if (!isDO) {   
-				cbReboot1.setChecked(false);   
-				showDeviceOwnerInstruction();    
-				return;
-			} 
-			CryptoManager.putBoolean(p, CryptoManager.BFU_ALIAS, "auto_reboot1", cbReboot1.isChecked());
-		});
-		
-		LinearLayout.LayoutParams rbParams1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        rbParams1.setMargins(0, 0, 0, 32);
-        cbReboot1.setLayoutParams(rbParams1);
-        buttonBox.addView(cbReboot1);
-                
+	                
         for (String a : actions) {
             Button b = new Button(this);
             b.setText(a);
