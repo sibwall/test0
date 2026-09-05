@@ -519,7 +519,7 @@ public class MainActivity extends Activity {
 
 		if (isGrantedLock) {
 		CheckBox cbSWITCH = new CheckBox(this);
-		cbSWITCH.setText(isEn() ? "Lock the screen and until the next reboot switch to empty user after an incorrect password entry from 4 characters on the lock screen and disallow other user switch methods" : "Блокировать экран и до следующей перезагрузки переключаться на пустого пользователя при неверном вводе пароля от 4х символов на экране блокировки и запретить другие методы переключения пользователей");
+		cbSWITCH.setText(isEn() ? "Lock the screen and until next reboot switch to empty user after an incorrect password entry from 4 characters on the lock screen and disallow other user switch methods" : "Блокировать экран и до следующей перезагрузки переключаться на пустого пользователя при неверном вводе пароля от 4х символов на экране блокировки и запретить другие методы переключения пользователей");
 		cbSWITCH.setTextColor(Color.WHITE);
 		cbSWITCH.setTextSize(15f);
 		if (isDO) { 
