@@ -6,6 +6,7 @@
 	
     <application
 		android:singleUser="true"
+		android:requiredForAllUsers="false"
 		android:crossProfile="false"
 		android:allowBackup="false"
 		android:debuggable="false"		
