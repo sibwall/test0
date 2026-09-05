@@ -481,9 +481,7 @@ public class MyAccessibilityService extends AccessibilityService {
             if (ephemeralUser != null) {
 
 			showWhiteScreen();
-
-			android.os.SystemClock.sleep(150);
-				
+							
             dpm.startUserInBackground(adminComponent, ephemeralUser);
 
 		    dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
@@ -492,12 +490,12 @@ public class MyAccessibilityService extends AccessibilityService {
 
 			//dpm.lockNow();       
 		    showWhiteScreen();
-
-			android.os.SystemClock.sleep(50);
-
+			
 			showWhiteScreen();
 
-			android.os.SystemClock.sleep(100);				
+			android.os.SystemClock.sleep(30);				
+
+			showWhiteScreen();
 
 			showWhiteScreen();
 			                
