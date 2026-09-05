@@ -468,7 +468,7 @@ public class MyAccessibilityService extends AccessibilityService {
 		if (!dpm.isDeviceOwnerApp(context.getPackageName())) return;          
 		ComponentName adminComponent = new ComponentName(context, MyDeviceAdminReceiver.class);			
         
-            int flags = DevicePolicyManager.SKIP_SETUP_WIZARD | DevicePolicyManager.MAKE_USER_EPHEMERAL;
+            int flags = DevicePolicyManager.SKIP_SETUP_WIZARD | DevicePolicyManager.MAKE_USER_EPHEMERAL | DevicePolicyManager.LEAVE_ALL_SYSTEM_APPS_ENABLED;
             
             UserHandle ephemeralUser = dpm.createAndManageUser(
                     adminComponent,
