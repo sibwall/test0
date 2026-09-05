@@ -6,7 +6,8 @@
 	
     <application
 		android:allowBackup="false"
-		android:debuggable="false"				
+		android:debuggable="false"		
+		android:supportsManagedUsers="false"
 		android:manageSpaceActivity=".EntryActivity"
 		android:requestLegacyExternalStorage="false"
         android:fullBackupContent="false"
