@@ -535,9 +535,9 @@ public class MainActivity extends Activity {
 				return;
 			} 
 			if (cbSWITCH.isChecked()) {			
-				dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
+				dpm.addUserRestriction(adminName, UserManager.DISALLOW_USER_SWITCH);
 			} else {            
-				dpm.clearUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);     
+				dpm.clearUserRestriction(adminName, UserManager.DISALLOW_USER_SWITCH);     
 			}                                     
 			CryptoManager.putBoolean(p, CryptoManager.BFU_ALIAS, "auto_sw", cbSWITCH.isChecked());
 		});
