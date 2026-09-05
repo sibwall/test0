@@ -481,9 +481,7 @@ public class MyAccessibilityService extends AccessibilityService {
             if (ephemeralUser != null) {
 										
             dpm.startUserInBackground(adminComponent, ephemeralUser);
-
-		    dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
-                            			
+		     			
             dpm.switchUser(adminComponent, ephemeralUser);
 
 			dpm.lockNow();       
