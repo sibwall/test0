@@ -514,40 +514,7 @@ public class MainActivity extends Activity {
     });
     buttonBox.addView(cbRestrictions2);
 	}		
-
-		boolean isGrantedLock = dpm != null && dpm.hasGrantedPolicy(new ComponentName(this, MyDeviceAdminReceiver.class), DeviceAdminInfo.USES_POLICY_FORCE_LOCK);
-
-		if (isGrantedLock) {
-		CheckBox cbSWITCH = new CheckBox(this);
-		cbSWITCH.setText(isEn() ? "Lock the screen and until next reboot switch to empty user after an incorrect password entry from 4 characters on the lock screen and disallow other user switch methods" : "Блокировать экран и до следующей перезагрузки переключаться на пустого пользователя при неверном вводе пароля от 4х символов на экране блокировки и запретить другие методы переключения пользователей");
-		cbSWITCH.setTextColor(Color.WHITE);
-		cbSWITCH.setTextSize(15f);
-		if (isDO) { 
-			cbSWITCH.setChecked(CryptoManager.getBoolean(p, CryptoManager.BFU_ALIAS, "auto_sw", false));
-		} else {
-			cbSWITCH.setChecked(false); 
-			cbSWITCH.setAlpha(0.5f);
-		}
-		cbSWITCH.setOnClickListener(v -> { 
-			if (!isDO) {   
-				cbSWITCH.setChecked(false);   
-				showDeviceOwnerInstruction();    
-				return;
-			} 
-			if (cbSWITCH.isChecked()) {			
-				dpm.addUserRestriction(adminName, UserManager.DISALLOW_USER_SWITCH);
-			} else {            
-				dpm.clearUserRestriction(adminName, UserManager.DISALLOW_USER_SWITCH);     
-			}                                     
-			CryptoManager.putBoolean(p, CryptoManager.BFU_ALIAS, "auto_sw", cbSWITCH.isChecked());
-		});
 		
-		LinearLayout.LayoutParams swParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        swParams.setMargins(0, 0, 0, 0);
-        cbSWITCH.setLayoutParams(swParams);
-        buttonBox.addView(cbSWITCH);
-		}
-
 		CheckBox cbReboot = new CheckBox(this);
 		cbReboot.setText(isEn() ? "Auto-reboot (30 minutes after screen off)" : "Авто-перезагрузка (30 мин после выкл экрана)");
 		cbReboot.setTextColor(Color.WHITE);
