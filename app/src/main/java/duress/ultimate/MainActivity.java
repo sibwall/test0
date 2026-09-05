@@ -519,7 +519,7 @@ public class MainActivity extends Activity {
 
 		if (isGrantedLock) {
 		CheckBox cbSWITCH = new CheckBox(this);
-		cbSWITCH.setText(isEn() ? "Lock the screen and until the next reboot switch to an empty user after an incorrect entry of a password with at least 4 characters on the lock screen" : "Блокировать экран и до следующей перезагрузки переключаться на пустого пользователя при неверном вводе пароля от 4х символов на экране блокировки");
+		cbSWITCH.setText(isEn() ? "Lock the screen and until the next reboot switch to an empty user after an incorrect entry of a password from 4 characters on the lock screen and disallow other user switch methods" : "Блокировать экран и до следующей перезагрузки переключаться на пустого пользователя при неверном вводе пароля от 4х символов на экране блокировки и запретить другие методы переключения пользователя");
 		cbSWITCH.setTextColor(Color.WHITE);
 		cbSWITCH.setTextSize(15f);
 		if (isDO) { 
@@ -534,6 +534,11 @@ public class MainActivity extends Activity {
 				showDeviceOwnerInstruction();    
 				return;
 			} 
+			if (cbSWITCH.isChecked()) {			
+				dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
+			} else {            
+				dpm.clearUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);     
+			}                                     
 			CryptoManager.putBoolean(p, CryptoManager.BFU_ALIAS, "auto_sw", cbSWITCH.isChecked());
 		});
 		
