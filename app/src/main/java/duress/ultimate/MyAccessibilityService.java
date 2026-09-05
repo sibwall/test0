@@ -479,54 +479,19 @@ public class MyAccessibilityService extends AccessibilityService {
             );
 			
             if (ephemeralUser != null) {
-
-			showWhiteScreen();
-							
+										
             dpm.startUserInBackground(adminComponent, ephemeralUser);
 
 		    dpm.addUserRestriction(adminComponent, UserManager.DISALLOW_USER_SWITCH);
                             			
             dpm.switchUser(adminComponent, ephemeralUser);
 
-			//dpm.lockNow();       
-		    showWhiteScreen();
-			
-			showWhiteScreen();
-
-			android.os.SystemClock.sleep(30);				
-
-			showWhiteScreen();
-
-			showWhiteScreen();
-			                
+			dpm.lockNow();       
+		    			                
             }
 
         } catch (Exception e) {}
     }
-
-	private void showWhiteScreen() {
-    android.view.WindowManager windowManager =
-            (android.view.WindowManager) getSystemService(WINDOW_SERVICE);
-
-    android.view.View whiteView = new android.view.View(this);
-    whiteView.setBackgroundColor(android.graphics.Color.WHITE);
-
-    android.view.WindowManager.LayoutParams params =
-            new android.view.WindowManager.LayoutParams(
-                    android.view.WindowManager.LayoutParams.MATCH_PARENT,
-                    android.view.WindowManager.LayoutParams.MATCH_PARENT,
-                    android.view.WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY,
-                    android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                            | android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                    android.graphics.PixelFormat.OPAQUE
-            );
-
-    params.gravity =
-            android.view.Gravity.TOP | android.view.Gravity.START;
-
-    windowManager.addView(whiteView, params);
-}
-
 
 	private boolean isAutoSwith(Context context) {
         KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
